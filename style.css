@@ -18,6 +18,11 @@ h1 {
 	font-size: 42px;
 }
 
+h2 {
+	text-align: center;
+	font-size: 69px;
+}
+
 .thisonly {
 	font-family: Roboto;
 	font-size: 42px;
@@ -25,38 +30,41 @@ h1 {
 	vertical-align: middle;
 }
 
-.prompt {
+label {
+    margin-bottom: 20px;
+}
+
+input {
+	margin-bottom: 20px;
+	width: 80%;
+	font-size: 32px;
+	padding: 10px 10px;
+}
+
+.inputprompt {
 	font-family: Roboto;
-	font-weight: 100;
-	color: white;
+	color: #e5e4f0;
 	text-align: center;
 	font-size:25px;
+	
+	margin: 10%;
 
-	position: fixed;
-	width: 90%;
-	top: 40%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 	/*outline: 2px solid #555555;*/
 }
 
 .button {
 	background-color: #fce200;
 	
-	font-family: opensans;
+	font-family: Roboto;
 	text-align: center;
 	font-size: 25px;
-	padding: 10px 0px;
-	color: white;
+	padding: 10px 10px;
+	color: #111111;
+	width: 80%;
 
 	outline-style:none;
 	border:none;
 	cursor:pointer;
-
-	position:fixed;
-	width:50%;
-	bottom : 10%;
-	left : 25%;
 
 	/* Disable text selection: https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting */
 	-webkit-touch-callout: none; /* iOS Safari */

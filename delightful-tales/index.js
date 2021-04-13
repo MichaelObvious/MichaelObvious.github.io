@@ -1,50 +1,46 @@
+let tale;
+let wordTextInput;
+let wordSubmitButton;
+let wordInputLabel;
+let wordInputDiv;
+let taleDiv;
+let taleTitle;
+let remainingLabel;
+
+function rndInt(min = 0, max = 1) {
+	return Math.floor(Math.random() * (max - min) ) + min;
+}
+
 class ParsedWord {
-	constructor(type, tags) {
+	constructor(type, tag) {
 		this.type = type;
-		this.tags = tags;
+		this.tag = tag;
 	}
 }
 
-class Article {}
-
-let parseTemplate = (tale) => {
+let parseTemplate = (template) => {
 	let parsed = [];
 
 	let last_idx = 0;
-	for (let i = 0; i < tale.length - 1; i++) {
-		let curr = tale[i];
-		let next = tale[i + 1];
+	for (let i = 0; i < template.length - 1; i++) {
+		let curr = template[i];
 
 		if (curr === '@') {
 			let hole_start = i + 1;
-			parsed.push(tale.slice(last_idx, i));
+			parsed.push(template.slice(last_idx, i));
 			do {
 				i++;
-				curr = tale[i];
-				next = tale[i + 1];
-			} while (curr !== '@' && i < tale.length - 1);
+				curr = template[i];
+			} while (curr !== '@' && i < template.length - 1);
 			let hole_end = i;
 			
-			let hole = tale.slice(hole_start, hole_end);
+			let hole = template.slice(hole_start, hole_end);
 			if (hole.includes(':')) {
-				let tags = hole.split(':');
-				hole = tags[0];
-				parsed.push(new ParsedWord(tags[0], tags.slice(1)));
+				let [type, tag] = hole.split(':');
+				parsed.push(new ParsedWord(type, tag));
 			} else {
 				parsed.push(new ParsedWord(hole));
 			}
-
-			i++;
-			last_idx = i;
-		} else if (curr === '<') {
-			parsed.push(tale.slice(last_idx, i));
-			do {
-				i++;
-				curr = tale[i];
-				next = tale[i + 1];
-			} while (curr !== '>' && i < tale.length - 1);
-			
-			parsed.push(new Article());
 
 			i++;
 			last_idx = i;
@@ -52,8 +48,109 @@ let parseTemplate = (tale) => {
 			continue;
 		}
 	}
+
+	parsed.push(template.slice(last_idx));
 	return parsed;
+};
+
+let countTaleHoles = (list) => {
+	let count = 0;
+	for (const e of list) {
+		if (!(typeof e === 'string' || e instanceof String)) {
+			count++;
+		}
+	}
+	return count;
+};
+
+let relativeIdx2Abs = () => {
+	let idx = tale.idx;
+	console.log(`idx: ${idx} ${tale}`);
+	
+	for (let i = 0; i < tale.parsedTale.length; i++) {
+		let e = tale.parsedTale[i];
+		if (!(typeof e === 'string' || e instanceof String)) {
+			if (idx == 0) {
+				return i;
+			} else {
+				idx--;
+			}
+		}
+	}
 }
 
-console.log(templates[0].tale)
-console.log(parseTemplate(templates[0].tale))
+let getLabelText = () => {
+	let temp = tale.parsedTale[relativeIdx2Abs()];
+	let type = temp.type;
+	let tag = temp.tag;
+
+	let text = `<b>${type}</b> `;
+	if (tag) {
+		text += `<em>${tag}</em>`;
+	}
+
+	return text;
+}
+
+let getParsedTaleText = () => {
+	let text = "";
+	
+	for (const e of tale.parsedTale) {
+		text += e;
+	}
+
+	return text;
+}
+
+let getWordsFromUser = () => {
+	let word = wordTextInput.value;
+	
+	if (word.length == 0) {
+		return;
+	}
+
+	tale.parsedTale[relativeIdx2Abs()] = `<em style="font-weight: 100;">${word}</em>`;
+
+	wordTextInput.value = "";
+	let holes_count = countTaleHoles(tale.parsedTale);
+	console.log(`holes_count: ${holes_count}`);
+	if (holes_count > 0) {
+		tale.idx = rndInt(0, holes_count);
+
+		wordInputLabel.innerHTML = getLabelText();
+		remainingLabel.innerHTML = `${holes_count} words remaining...`;
+		wordTextInput.focus();
+	} else {
+		wordInputDiv.style = "display: none;";
+		taleDiv.style = "";
+		
+		taleDiv.innerHTML = getParsedTaleText();
+	}
+};
+
+window.onload = () => {
+	wordTextInput = document.getElementById("wordtext");
+	wordSubmitButton = document.getElementById("wordbutton");
+	wordInputLabel = document.getElementById("wordinputlabel");
+	remainingLabel = document.getElementById("remaininglabel");
+	wordInputDiv = document.getElementById("wordinputdiv");
+	taleDiv = document.getElementById("talediv");
+	taleTitle = document.getElementById("taletitle");
+
+	wordInputDiv.style = "";
+	taleDiv.style = "display: none;";
+
+	{ // set language
+
+	}
+
+	tale = templates[rndInt(0, templates.length)];
+
+	taleTitle.innerHTML = tale.title;
+	tale.parsedTale = parseTemplate(tale.tale);
+	let holes = countTaleHoles(tale.parsedTale);
+	tale.idx = rndInt(0, holes);
+	wordInputLabel.innerHTML = getLabelText();
+	remainingLabel.innerHTML = `${holes} words remaining...`;
+	wordSubmitButton.onclick = getWordsFromUser;
+};
