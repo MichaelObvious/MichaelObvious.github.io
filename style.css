@@ -1,0 +1,13 @@
+@font-face { font-family: Roboto; src: url('res/Roboto/Roboto-Regular.ttf');}
+
+body {
+	background-color: #111111;
+}
+
+.thisonly {
+	font-family: Roboto;
+	color: #e5e4f0;
+	font-size: 42px;
+	text-align: center;
+	vertical-align: middle;
+}
