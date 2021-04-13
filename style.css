@@ -1,13 +1,80 @@
-@font-face { font-family: Roboto; src: url('res/Roboto/Roboto-Regular.ttf');}
+@font-face { font-family: Roboto; src: url('res/Roboto/Roboto-Light.ttf'); font-weight: 100;}
+@font-face { font-family: Roboto; src: url('res/Roboto/Roboto-Regular.ttf'); font-weight: normal;}
+@font-face { font-family: Roboto; src: url('res/Roboto/Roboto-Bold.ttf'); font-weight: bold;}
+@font-face { font-family: Roboto; src: url('res/Roboto/Roboto-Black.ttf'); font-weight: bolder;}
+@font-face { font-family: Roboto; src: url('res/Roboto/Roboto-LightItalic.ttf'); font-style: italic; font-weight: 100;}
+@font-face { font-family: Roboto; src: url('res/Roboto/Roboto-Italic.ttf'); font-style: italic; font-weight: normal;}
+@font-face { font-family: Roboto; src: url('res/Roboto/Roboto-BoldItalic.ttf'); font-style: italic; font-weight: bold;}
+@font-face { font-family: Roboto; src: url('res/Roboto/Roboto-BlackItalic.ttf'); font-style: italic; font-weight: bolder;}
 
 body {
 	background-color: #111111;
+	color: #e5e4f0;
+	font-family: Roboto;
+}
+
+h1 {
+	text-align: center;
+	font-size: 42px;
 }
 
 .thisonly {
 	font-family: Roboto;
-	color: #e5e4f0;
 	font-size: 42px;
 	text-align: center;
 	vertical-align: middle;
+}
+
+.prompt {
+	font-family: Roboto;
+	font-weight: 100;
+	color: white;
+	text-align: center;
+	font-size:25px;
+
+	position: fixed;
+	width: 90%;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	/*outline: 2px solid #555555;*/
+}
+
+.button {
+	background-color: #fce200;
+	
+	font-family: opensans;
+	text-align: center;
+	font-size: 25px;
+	padding: 10px 0px;
+	color: white;
+
+	outline-style:none;
+	border:none;
+	cursor:pointer;
+
+	position:fixed;
+	width:50%;
+	bottom : 10%;
+	left : 25%;
+
+	/* Disable text selection: https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting */
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-moz-user-select: none; /* Old versions of Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Chrome, Opera and Firefox */
+
+	/* 
+	Prevent double-tapping on button from zooming page on mobile
+	https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action
+	*/
+	touch-action: manipulation; 
+}
+
+.button:hover {
+  background-color: #fff64d;
+}
+.button:active {
+  background-color: #fcc100;
 }
