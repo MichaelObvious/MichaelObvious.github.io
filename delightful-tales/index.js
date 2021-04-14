@@ -29,6 +29,18 @@ let show = (element) => {
 	element.style = "";
 }
 
+function loadFile(path, callback) {   
+    var xobj = new XMLHttpRequest();
+        xobj.overrideMimeType("application/text");
+    xobj.open('GET', path, true); 
+    xobj.onreadystatechange = function () {
+          if (xobj.readyState == 4 && xobj.status == "200") {
+            callback(xobj.responseText);
+          }
+    };
+    xobj.send(null);  
+ }
+
 class ParsedWord {
 	constructor(type, tag) {
 		this.type = type;
@@ -181,7 +193,11 @@ window.onload = () => {
 
 	}
 
-	tale = templates[rndInt(0, templates.length)];
+	// CHOOSE TALE
+
+	tale = TEMPLATES[rndInt(0, TEMPLATES.length)];
+
+	// END CHOOSE TALE
 
 	taleTitle.innerHTML = tale.title;
 	parseTemplate();

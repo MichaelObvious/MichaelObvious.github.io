@@ -1,4 +1,4 @@
-const templates = [
+const TEMPLATES = [
 	{
 		title: "PIC-NIC SHORT",
 		tale: `I remember that time when I @1#verb@ed a person.
