@@ -6,40 +6,14 @@ let wordInputDiv;
 let taleDiv;
 let taleTitle;
 let remainingLabel;
+let allWordsCollectedText;
 let generateDiv;
 let generateButton;
 let newTaleDiv;
 let newTaleBtn;
 
-let isStr = (x) => {
-	return typeof x === 'string' || x instanceof String;
-}
-
-let rndInt = (min = 0, max = 1) => {
-	return Math.floor(Math.random() * (max - min) ) + min;
-}
-
-let hash = (s) => s.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);
-
-let hide = (element) => {
-	element.style = "display: none;";
-}
-
-let show = (element) => {
-	element.style = "";
-}
-
-function loadFile(path, callback) {   
-    var xobj = new XMLHttpRequest();
-        xobj.overrideMimeType("application/text");
-    xobj.open('GET', path, true); 
-    xobj.onreadystatechange = function () {
-          if (xobj.readyState == 4 && xobj.status == "200") {
-            callback(xobj.responseText);
-          }
-    };
-    xobj.send(null);  
- }
+let insertTextTemplate;
+let remainingTextTemplate;
 
 class ParsedWord {
 	constructor(type, tag) {
@@ -115,11 +89,11 @@ let countTaleHoles = (list) => {
 };
 
 let getLabelText = () => {
-	let temp = tale.parsedWords[tale.idx];
-	let type = temp.type;
-	let tag = temp.tag;
+	const temp = tale.parsedWords[tale.idx];
+	const type = temp.type;
+	const tag = temp.tag;
 
-	let text = `Insert a <b>${type}</b> `;
+	let text = insertTextTemplate.format(`<b>${type}</b> `);
 	if (tag) {
 		text += `<em>${tag}</em>`;
 	}
@@ -138,7 +112,7 @@ let getParsedTaleText = () => {
 }
 
 let getWordsFromUser = () => {
-	let word = wordTextInput.value;
+	const word = wordTextInput.value;
 	
 	if (word.length == 0) {
 		return;
@@ -154,14 +128,14 @@ let getWordsFromUser = () => {
 	delete tale.parsedWords[tale.idx];
 
 	wordTextInput.value = "";
-	let keys = Object.keys(tale.parsedWords);
-	let holes_count = keys.length;
+	const keys = Object.keys(tale.parsedWords);
+	const holes_count = keys.length;
 	
 	if (holes_count > 0) {
 		tale.idx = keys[rndInt(0, holes_count)];
 
 		wordInputLabel.innerHTML = getLabelText();
-		remainingLabel.innerHTML = `${holes_count} words remaining...`;
+		remainingLabel.innerHTML = remainingTextTemplate.format(holes_count);
 		wordTextInput.focus();
 	} else {
 		hide(wordInputDiv);
@@ -179,6 +153,7 @@ window.onload = () => {
 	wordInputDiv = document.getElementById("wordinputdiv");
 	taleDiv = document.getElementById("talediv");
 	taleTitle = document.getElementById("taletitle");
+	allWordsCollectedText = document.getElementById("allcollected");
 	generateDiv = document.getElementById("generatediv");
 	generateButton = document.getElementById("generatebtn");
 	newTaleDiv = document.getElementById("newtalediv");
@@ -189,23 +164,38 @@ window.onload = () => {
 	hide(generateDiv);
 	show(newTaleDiv);
 
-	{ // set language
+	// set language
+	const params = new URLSearchParams(window.location.search);
+	if (params.get("it") !== null) {
+		wordSubmitButton.innerHTML = "Fatto";
+		allWordsCollectedText.innerHTML = "Tutte le parole sono state raccolte";
+		generateButton.innerHTML = "Mostra la storia";
+		newTaleBtn.innerHTML = "Scegli un'altra storia";
 
+		insertTextTemplate = "Inserisca un {0}";
+		remainingTextTemplate = "{0} parole rimanenti...";
+	} else {
+		wordSubmitButton.innerHTML = "Done";
+		allWordsCollectedText.innerHTML = "All words are collected";
+		generateButton.innerHTML = "Show the tale";
+		newTaleBtn.innerHTML = "Pick another tale";
+
+		insertTextTemplate = "Insert a {0}";
+		remainingTextTemplate = "{0} words remaining...";
 	}
 
 	// CHOOSE TALE
-
 	tale = TEMPLATES[rndInt(0, TEMPLATES.length)];
 
 	// END CHOOSE TALE
 
 	taleTitle.innerHTML = tale.title;
 	parseTemplate();
-	let keys = Object.keys(tale.parsedWords);
-	let holes = keys.length;
+	const keys = Object.keys(tale.parsedWords);
+	const holes = keys.length;
 	tale.idx = keys[rndInt(0, holes)];
 	wordInputLabel.innerHTML = getLabelText();
-	remainingLabel.innerHTML = `${holes} words remaining...`;
+	remainingLabel.innerHTML = remainingTextTemplate.format(holes);
 	wordSubmitButton.onclick = getWordsFromUser;
 	newTaleBtn.onclick = window.onload;
 	
