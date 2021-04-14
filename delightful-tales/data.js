@@ -1,8 +1,8 @@
 const templates = [
 	{
 		title: "PIC-NIC SHORT",
-		tale: `I remember that time when I @verb@ed a person.
-It was a @adjective@ day and I was @verb:participle@ with @propernoun@. `
+		tale: `I remember that time when I @1#verb@ed a person.
+It was a @adjective@ day and I was @verb:participle@ with @2#propernoun@. @2#propernoun@ was a snowman.`
 	},
 	{
 		title: "PIC-NIC",

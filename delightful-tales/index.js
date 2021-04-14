@@ -9,9 +9,15 @@ let remainingLabel;
 let generateDiv;
 let generateButton;
 
+let isStr = (x) => {
+	return typeof x === 'string' || x instanceof String;
+}
+
 let rndInt = (min = 0, max = 1) => {
 	return Math.floor(Math.random() * (max - min) ) + min;
 }
+
+let hash = (s) => s.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);
 
 let hide = (element) => {
 	element.style = "display: none;";
@@ -28,28 +34,51 @@ class ParsedWord {
 	}
 }
 
-let parseTemplate = (template) => {
-	let parsed = [];
+class Idx {
+	constructor(idx) {
+		this.idx = idx;
+	}
+}
+
+let parseTemplate = () => {
+	let template = tale.tale;
+	tale.parsedWords = {};
+	tale.parsedTale = [];
+
 
 	let last_idx = 0;
 	for (let i = 0; i < template.length - 1; i++) {
 		let curr = template[i];
 
 		if (curr === '@') {
+			let hash_idx = '';
 			let hole_start = i + 1;
-			parsed.push(template.slice(last_idx, i));
+			tale.parsedTale.push(template.slice(last_idx, i));
 			do {
 				i++;
 				curr = template[i];
+
+				if (curr === '#') {
+					hash_idx = template.slice(hole_start, i);
+					console.log(hash_idx);
+					hole_start = i + 1;
+				}
 			} while (curr !== '@' && i < template.length - 1);
 			let hole_end = i;
+			
+			if (hash_idx.length == 0) {
+				do  {
+					hash_idx = hash(rndInt(0, 1_000_000).toString()).toString();
+				} while (hash_idx in tale.parsedWords);
+			}
+			tale.parsedTale.push(new Idx(hash_idx));
 			
 			let hole = template.slice(hole_start, hole_end);
 			if (hole.includes(':')) {
 				let [type, tag] = hole.split(':');
-				parsed.push(new ParsedWord(type, tag));
+				tale.parsedWords[hash_idx] = new ParsedWord(type, tag);
 			} else {
-				parsed.push(new ParsedWord(hole));
+				tale.parsedWords[hash_idx] = new ParsedWord(hole);
 			}
 
 			i++;
@@ -58,38 +87,23 @@ let parseTemplate = (template) => {
 			continue;
 		}
 	}
-
-	parsed.push(template.slice(last_idx));
-	return parsed;
+	console.log(tale.parsedWords)
+	console.log(tale.parsedTale)
+	tale.parsedTale.push(template.slice(last_idx));
 };
 
 let countTaleHoles = (list) => {
 	let count = 0;
 	for (const e of list) {
-		if (!(typeof e === 'string' || e instanceof String)) {
+		if (!isStr(e)) {
 			count++;
 		}
 	}
 	return count;
 };
 
-let relativeIdx2Abs = () => {
-	let idx = tale.idx;
-	
-	for (let i = 0; i < tale.parsedTale.length; i++) {
-		let e = tale.parsedTale[i];
-		if (!(typeof e === 'string' || e instanceof String)) {
-			if (idx == 0) {
-				return i;
-			} else {
-				idx--;
-			}
-		}
-	}
-}
-
 let getLabelText = () => {
-	let temp = tale.parsedTale[relativeIdx2Abs()];
+	let temp = tale.parsedWords[tale.idx];
 	let type = temp.type;
 	let tag = temp.tag;
 
@@ -118,17 +132,25 @@ let getWordsFromUser = () => {
 		return;
 	}
 
-	tale.parsedTale[relativeIdx2Abs()] = `<em style="font-weight: 100;">${word}</em>`;
+	for (let i = 0; i < tale.parsedTale.length; i++) {
+		if (!isStr(tale.parsedTale[i])) {
+			if (tale.parsedTale[i].idx === tale.idx) {
+				tale.parsedTale[i] = `<em style="font-weight: 100;">${word}</em>`;
+			} 
+		} 
+	}
+	delete tale.parsedWords[tale.idx];
 
 	wordTextInput.value = "";
-	let holes_count = countTaleHoles(tale.parsedTale);
+	let keys = Object.keys(tale.parsedWords);
+	let holes_count = keys.length;
 	
 	if (holes_count > 0) {
-		tale.idx = rndInt(0, holes_count);
+		tale.idx = keys[rndInt(0, holes_count)];
 
 		wordInputLabel.innerHTML = getLabelText();
 		remainingLabel.innerHTML = `${holes_count} words remaining...`;
-		//wordTextInput.focus();
+		wordTextInput.focus();
 	} else {
 		hide(wordInputDiv);
 		show(generateDiv);
@@ -150,6 +172,7 @@ window.onload = () => {
 
 	show(wordInputDiv);
 	hide(taleDiv);
+	hide(generateDiv);
 
 	{ // set language
 
@@ -158,9 +181,10 @@ window.onload = () => {
 	tale = templates[rndInt(0, templates.length)];
 
 	taleTitle.innerHTML = tale.title;
-	tale.parsedTale = parseTemplate(tale.tale);
-	let holes = countTaleHoles(tale.parsedTale);
-	tale.idx = rndInt(0, holes);
+	parseTemplate();
+	let keys = Object.keys(tale.parsedWords);
+	let holes = keys.length;
+	tale.idx = keys[rndInt(0, holes)];
 	wordInputLabel.innerHTML = getLabelText();
 	remainingLabel.innerHTML = `${holes} words remaining...`;
 	wordSubmitButton.onclick = getWordsFromUser;

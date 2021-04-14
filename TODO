@@ -1,4 +1,7 @@
 - [X] Console log
 - [X] Generate button
-- [ ] New Parsing with IDs
+- [X] New Parsing with IDs
+    - [X] indx selecting
+    - [X] to string
+- [ ] text files for templates
 - [ ] It lang
