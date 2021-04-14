@@ -203,6 +203,7 @@ window.onload = () => {
 	wordInputLabel.innerHTML = getLabelText();
 	remainingLabel.innerHTML = remainingTextTemplate.format(holes);
 	wordSubmitButton.onclick = getWordsFromUser;
+	wordInputDiv.onsubmit = () => { getWordsFromUser(); return false };
 	newTaleBtn.onclick = window.onload;
 	
 	generateButton.onclick = () => {
