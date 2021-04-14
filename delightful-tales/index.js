@@ -15,6 +15,8 @@ let newTaleBtn;
 let insertTextTemplate;
 let remainingTextTemplate;
 
+let taleTemplates;
+
 class ParsedWord {
 	constructor(type, tag) {
 		this.type = type;
@@ -174,6 +176,8 @@ window.onload = () => {
 
 		insertTextTemplate = "Inserisca un {0}";
 		remainingTextTemplate = "{0} parole rimanenti...";
+
+		taleTemplates = TEMPLATES.it;
 	} else {
 		wordSubmitButton.innerHTML = "Done";
 		allWordsCollectedText.innerHTML = "All words are collected";
@@ -182,10 +186,12 @@ window.onload = () => {
 
 		insertTextTemplate = "Insert a {0}";
 		remainingTextTemplate = "{0} words remaining...";
+
+		taleTemplates = TEMPLATES.en;
 	}
 
 	// CHOOSE TALE
-	tale = TEMPLATES[rndInt(0, TEMPLATES.length)];
+	tale = taleTemplates[rndInt(0, taleTemplates.length)];
 
 	// END CHOOSE TALE
 

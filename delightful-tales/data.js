@@ -1,27 +1,16 @@
-const TEMPLATES = [
-	{
-		title: "PIC-NIC SHORT",
-		tale: `I remember that time when I @1#verb@ed a person.
-It was a @adjective@ day and I was @verb:participle@ with @2#propernoun@. @2#propernoun@ was a snowman.`
-	},
-	{
-		title: "PIC-NIC",
-		tale: `I remember that time when I @verb@ed a person.
-It was a @adjective@ day and I was @verb:participle@ with @propernoun@. 
-We had decided to have a picnic and so we brought everything we needed: a @adjective@ tablecloth, plates, cutlery and glasses of @noun@;
-and to eat pizzas, a @noun@, some @noun@ and a @noun@.
-They @verb@ed on the ground and started @verb@ing @adverb@.
-We were in a @adjective@ grove and nobody was there.
-We @verb:past@ a lot, and we were eating the last pizza.
-They had already eaten @number@ slices, so the last one was mine.
-@propernoun@ pointed to me and exclaimed: "Look, a @noun@!" And I, @adjective@, turned around @adverb@, but there was nothing.
-When I turned back, I saw him eating my last slice of pizza!
-I @verb@ed the first object at hand, which was a @noun@ and I stuck it in the @noun@.
-They @verb@ed and fell to the @adjective@ ground.
-@adverb@, I dug a hole and threw my friend's @adjective@ body into it and went off pretending nothing happened.
-NO ONE CAN TOUCH MY PIZZA!`
-	}
-];
+const TEMPLATES = {
+	en: [
+		{
+			title: "PIC-NIC SHORT",
+			tale: `I remember that time when I @1#verb@ed a person. It was a @adjective@ day and I was @verb:participle@ with @2#propernoun@. @2#propernoun@ was a snowman.`
+		},
+		{
+			title: "PIC-NIC",
+			tale: `I remember that time when I @verb:past@ a person. It was a @adjective@ day and I was @verb:participle@ with @1#propernoun@.  We had decided to have a picnic and so we brought everything we needed: a @adjective@ tablecloth, plates, cutlery and glasses of @noun@; and to eat pizzas, a @noun@, some @noun@ and a @noun@. @1#propernoun@ @verb:past@ on the ground and started @verb:participle@ @adverb@. We were in a @adjective@ grove and nobody was there. We @verb:past@ a lot, and we were eating the last pizza. They had already eaten @number@ slices, so the last one was mine. @1#propernoun@ pointed to me and exclaimed: "Look, a @noun@!" And I, @adjective@, turned around @adverb@, but there was nothing. When I turned back, I saw him eating my last slice of pizza! I @verb:past@ the first object at hand, which was a @noun@ and I stuck it in the @noun@. @1#propernoun@ @verb:past@ and fell to the @adjective@ ground. @adverb@, I dug a hole and threw my friend's @adjective@ body into it and went off pretending nothing happened. NO ONE CAN TOUCH MY PIZZA!`
+		}
+	],
+	it: []
+};
 
 // |TEMPLATES
 // 
