@@ -167,6 +167,7 @@ window.onload = () => {
 	show(newTaleDiv);
 
 	// set language
+	let lang;
 	const params = new URLSearchParams(window.location.search);
 	if (params.get("it") !== null) {
 		wordSubmitButton.innerHTML = "Fatto";
@@ -178,6 +179,7 @@ window.onload = () => {
 		remainingTextTemplate = "{0} parole rimanenti...";
 
 		taleTemplates = TEMPLATES.it;
+		lang = "it";
 	} else {
 		wordSubmitButton.innerHTML = "Done";
 		allWordsCollectedText.innerHTML = "All words are collected";
@@ -188,12 +190,14 @@ window.onload = () => {
 		remainingTextTemplate = "{0} words remaining...";
 
 		taleTemplates = TEMPLATES.en;
+		lang = "en";
 	}
 
 	// CHOOSE TALE
+	// localStorage.removeItem('recentTales');
 	let recentTales = JSON.parse(localStorage.getItem('recentTales'));
 	if (!recentTales) {
-		recentTales = {};
+		recentTales = { it: {}, en: {} };
 	}
 
 	let lowest_count = Infinity;
@@ -202,18 +206,18 @@ window.onload = () => {
 	for (let i = 0; i < 100; i++) {
 		tale = taleTemplates[rndInt(0, taleTemplates.length)];
 		
-		if (!(tale.title in recentTales)) {
-			recentTales[tale.title] = 0;
+		if (!(tale.title in recentTales[lang])) {
+			recentTales[lang][tale.title] = 0;
 			lowest_tale = tale;
 			break;
 		}
 
-		if (recentTales[tale.title] < lowest_count) {
-			lowest_count = recentTales[tale.title];
+		if (recentTales[lang][tale.title] < lowest_count) {
+			lowest_count = recentTales[lang][tale.title];
 			lowest_tale = tale;
 		}
 	}
-	recentTales[lowest_tale.title] += 1;
+	recentTales[lang][lowest_tale.title] += 1;
 	localStorage.setItem('recentTales', JSON.stringify(recentTales));
 
 	tale = lowest_tale;
