@@ -8,6 +8,8 @@ let taleTitle;
 let remainingLabel;
 let generateDiv;
 let generateButton;
+let newTaleDiv;
+let newTaleBtn;
 
 let isStr = (x) => {
 	return typeof x === 'string' || x instanceof String;
@@ -60,7 +62,6 @@ let parseTemplate = () => {
 
 				if (curr === '#') {
 					hash_idx = template.slice(hole_start, i);
-					console.log(hash_idx);
 					hole_start = i + 1;
 				}
 			} while (curr !== '@' && i < template.length - 1);
@@ -87,8 +88,7 @@ let parseTemplate = () => {
 			continue;
 		}
 	}
-	console.log(tale.parsedWords)
-	console.log(tale.parsedTale)
+	
 	tale.parsedTale.push(template.slice(last_idx));
 };
 
@@ -107,7 +107,7 @@ let getLabelText = () => {
 	let type = temp.type;
 	let tag = temp.tag;
 
-	let text = `<b>${type}</b> `;
+	let text = `Insert a <b>${type}</b> `;
 	if (tag) {
 		text += `<em>${tag}</em>`;
 	}
@@ -169,10 +169,13 @@ window.onload = () => {
 	taleTitle = document.getElementById("taletitle");
 	generateDiv = document.getElementById("generatediv");
 	generateButton = document.getElementById("generatebtn");
+	newTaleDiv = document.getElementById("newtalediv");
+	newTaleBtn = document.getElementById("newtalebtn");
 
 	show(wordInputDiv);
 	hide(taleDiv);
 	hide(generateDiv);
+	show(newTaleDiv);
 
 	{ // set language
 
@@ -188,6 +191,7 @@ window.onload = () => {
 	wordInputLabel.innerHTML = getLabelText();
 	remainingLabel.innerHTML = `${holes} words remaining...`;
 	wordSubmitButton.onclick = getWordsFromUser;
+	newTaleBtn.onclick = window.onload;
 	
 	generateButton.onclick = () => {
 		hide(wordInputDiv)
