@@ -6,9 +6,19 @@ let wordInputDiv;
 let taleDiv;
 let taleTitle;
 let remainingLabel;
+let generateDiv;
+let generateButton;
 
-function rndInt(min = 0, max = 1) {
+let rndInt = (min = 0, max = 1) => {
 	return Math.floor(Math.random() * (max - min) ) + min;
+}
+
+let hide = (element) => {
+	element.style = "display: none;";
+}
+
+let show = (element) => {
+	element.style = "";
 }
 
 class ParsedWord {
@@ -65,7 +75,6 @@ let countTaleHoles = (list) => {
 
 let relativeIdx2Abs = () => {
 	let idx = tale.idx;
-	console.log(`idx: ${idx} ${tale}`);
 	
 	for (let i = 0; i < tale.parsedTale.length; i++) {
 		let e = tale.parsedTale[i];
@@ -113,16 +122,16 @@ let getWordsFromUser = () => {
 
 	wordTextInput.value = "";
 	let holes_count = countTaleHoles(tale.parsedTale);
-	console.log(`holes_count: ${holes_count}`);
+	
 	if (holes_count > 0) {
 		tale.idx = rndInt(0, holes_count);
 
 		wordInputLabel.innerHTML = getLabelText();
 		remainingLabel.innerHTML = `${holes_count} words remaining...`;
-		wordTextInput.focus();
+		//wordTextInput.focus();
 	} else {
-		wordInputDiv.style = "display: none;";
-		taleDiv.style = "";
+		hide(wordInputDiv);
+		show(generateDiv);
 		
 		taleDiv.innerHTML = getParsedTaleText();
 	}
@@ -136,9 +145,11 @@ window.onload = () => {
 	wordInputDiv = document.getElementById("wordinputdiv");
 	taleDiv = document.getElementById("talediv");
 	taleTitle = document.getElementById("taletitle");
+	generateDiv = document.getElementById("generatediv");
+	generateButton = document.getElementById("generatebtn");
 
-	wordInputDiv.style = "";
-	taleDiv.style = "display: none;";
+	show(wordInputDiv);
+	hide(taleDiv);
 
 	{ // set language
 
@@ -153,4 +164,10 @@ window.onload = () => {
 	wordInputLabel.innerHTML = getLabelText();
 	remainingLabel.innerHTML = `${holes} words remaining...`;
 	wordSubmitButton.onclick = getWordsFromUser;
+	
+	generateButton.onclick = () => {
+		hide(wordInputDiv)
+		hide(generateDiv);
+		show(taleDiv);
+	}
 };

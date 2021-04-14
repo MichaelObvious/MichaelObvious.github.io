@@ -1,5 +1,10 @@
 const templates = [
 	{
+		title: "PIC-NIC SHORT",
+		tale: `I remember that time when I @verb@ed a person.
+It was a @adjective@ day and I was @verb:participle@ with @propernoun@. `
+	},
+	{
 		title: "PIC-NIC",
 		tale: `I remember that time when I @verb@ed a person.
 It was a @adjective@ day and I was @verb:participle@ with @propernoun@. 
