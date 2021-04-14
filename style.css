@@ -1,11 +1,12 @@
+/* SLOW */
 @font-face { font-family: Roboto; src: url('res/Roboto/Roboto-Light.ttf'); font-weight: 100;}
 @font-face { font-family: Roboto; src: url('res/Roboto/Roboto-Regular.ttf'); font-weight: normal;}
 @font-face { font-family: Roboto; src: url('res/Roboto/Roboto-Bold.ttf'); font-weight: bold;}
-@font-face { font-family: Roboto; src: url('res/Roboto/Roboto-Black.ttf'); font-weight: bolder;}
+/*@font-face { font-family: Roboto; src: url('res/Roboto/Roboto-Black.ttf'); font-weight: bolder;}*/
 @font-face { font-family: Roboto; src: url('res/Roboto/Roboto-LightItalic.ttf'); font-style: italic; font-weight: 100;}
 @font-face { font-family: Roboto; src: url('res/Roboto/Roboto-Italic.ttf'); font-style: italic; font-weight: normal;}
-@font-face { font-family: Roboto; src: url('res/Roboto/Roboto-BoldItalic.ttf'); font-style: italic; font-weight: bold;}
-@font-face { font-family: Roboto; src: url('res/Roboto/Roboto-BlackItalic.ttf'); font-style: italic; font-weight: bolder;}
+/*@font-face { font-family: Roboto; src: url('res/Roboto/Roboto-BoldItalic.ttf'); font-style: italic; font-weight: bold;}*/
+/*@font-face { font-family: Roboto; src: url('res/Roboto/Roboto-BlackItalic.ttf'); font-style: italic; font-weight: bolder;}*/
 
 body {
 	background-color: #111111;
@@ -36,7 +37,7 @@ label {
 
 input {
 	margin-bottom: 20px;
-	width: 80%;
+	width: 85%;
 	font-size: 32px;
 	padding: 10px 10px;
 }
@@ -56,11 +57,12 @@ input {
 	background-color: #fce200;
 	
 	font-family: Roboto;
+	font-weight: bold;
 	text-align: center;
 	font-size: 25px;
 	padding: 10px 10px;
 	color: #111111;
-	width: 80%;
+	width: 85%;
 
 	outline-style:none;
 	border:none;
