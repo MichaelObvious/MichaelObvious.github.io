@@ -191,7 +191,32 @@ window.onload = () => {
 	}
 
 	// CHOOSE TALE
-	tale = taleTemplates[rndInt(0, taleTemplates.length)];
+	let recentTales = JSON.parse(localStorage.getItem('recentTales'));
+	if (!recentTales) {
+		recentTales = {};
+	}
+
+	let lowest_count = Infinity;
+	let lowest_tale;
+
+	for (let i = 0; i < 100; i++) {
+		tale = taleTemplates[rndInt(0, taleTemplates.length)];
+		
+		if (!(tale.title in recentTales)) {
+			recentTales[tale.title] = 0;
+			lowest_tale = tale;
+			break;
+		}
+
+		if (recentTales[tale.title] < lowest_count) {
+			lowest_count = recentTales[tale.title];
+			lowest_tale = tale;
+		}
+	}
+	recentTales[lowest_tale.title] += 1;
+	localStorage.setItem('recentTales', JSON.stringify(recentTales));
+
+	tale = lowest_tale;
 
 	// END CHOOSE TALE
 
