@@ -41,6 +41,9 @@ input {
 	width: 85%;
 	font-size: 24px;
 	padding: 10px 10px;
+	
+	border-radius: 15px;
+	outline-style:none;
 }
 
 .inputprompt {
@@ -77,6 +80,7 @@ input {
 	color: #111111;
 	width: 85%;
 
+	border-radius: 15px;
 	outline-style:none;
 	border:none;
 	cursor:pointer;
@@ -96,7 +100,7 @@ input {
 }
 
 .button:hover {
-  background-color: #fff64d;
+  background-color: #fce200;
 }
 .button:active {
   background-color: #fcc100;
