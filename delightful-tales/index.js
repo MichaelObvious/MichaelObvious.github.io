@@ -1,3 +1,12 @@
+/*
+     WARNING:
+	 Tell you: this is awful code,
+	 I spent like two afternoons on it.
+	 advise you not to touch it
+	                            Sincerely yours,
+								    -- MichaelObvious
+*/
+
 let tale;
 let wordTextInput;
 let wordSubmitButton;
