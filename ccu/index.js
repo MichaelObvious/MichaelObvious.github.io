@@ -80,7 +80,7 @@ let updatePlayerLabels = () => {
     removeChildren(playersNamesDiv);
     players.forEach(function (p, index) {
         let playerNameLabel = document.createElement("div");
-        playerNameLabel.style = `text-align: center; display: table-cell; margin: 0 1em 0 1em; width: ${Math.floor(100/players.length)}vw;${index === czar ? "color: #fce200;" : ""}`
+        playerNameLabel.style = `text-align: center; margin: 0 1em 0 1em; max-width: ${Math.floor(100/players.length)}vw;${index === czar ? "color: #fce200;" : ""}`
 
         if (index === choosing) {
             playerNameLabel.innerHTML = `<b>${p.name}</b><br/>${p.points}`;
