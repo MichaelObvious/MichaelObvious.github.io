@@ -94,11 +94,16 @@ let updatePlayerLabels = () => {
 
 let newPrompt = () => {
     removeChildren(promptDiv);
-    let promptLabel = document.createElement("h3");
     game.prompt = prompts.shift();
     to_choose = (game.prompt.match(/@/g) || []).length;
-    promptLabel.innerHTML = game.prompt.replaceAll('@', '__________');
-    promptDiv.appendChild(promptLabel);
+    if (to_choose <= 0) {
+        newPrompt();
+    } else {
+
+        let promptLabel = document.createElement("h3");
+        promptLabel.innerHTML = game.prompt.replaceAll('@', '__________');
+        promptDiv.appendChild(promptLabel);
+    }
 }
 
 let updateLocalPrompt = () => {
