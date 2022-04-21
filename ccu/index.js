@@ -44,7 +44,7 @@ let prossimoGiocatore;
 
 let fastShuffleDeck = (deck) => {
     for (let i = 0; i < deck.length; i++) {
-        let newPos = rndInt(0, deck.length - 1);
+        let newPos = rndInt(0, deck.length);
         let card = deck.shift();
         deck.splice(newPos, 0, card);
     }
@@ -52,16 +52,16 @@ let fastShuffleDeck = (deck) => {
 }
 
 let shuffleDeck = (deck) => {
-    let originalCard = deck[0];
+    let originalCard = deck[deck.length - 1];
     let topCount = 0;
 
     while (topCount < 3) {
-        let newPos = rndInt(2, deck.length - 1);
+        let newPos = rndInt(0, deck.length);
         let card = deck.shift();
+        deck.splice(newPos, 0, card);
         if (originalCard == card) {
             topCount += 1;
         }
-        deck.splice(newPos, 0, card);
     }
     return deck;
 }
