@@ -138,9 +138,9 @@ let setUpPlayerScene = () => {
                     updatePlayerLabels();
                     removeChildren(deckDiv);
                     if (round_winners.length > 1) {
-                        pointsTo.innerHTML += `<h5>I punti vanno a: <em>${round_winners.join(', ')}</em></h5>`
+                        pointsTo.innerHTML = `<h5>I punti vanno a: <em>${round_winners.join(', ')}</em></h5>`
                     } else {
-                        pointsTo.innerHTML += `<h5>Il punto va a: <em>${round_winners[0]}</em></h5>`
+                        pointsTo.innerHTML = `<h5>Il punto va a: <em>${round_winners[0]}</em></h5>`
                     }
                     show(pointsTo);
                     show(prossimaMano);
