@@ -119,7 +119,7 @@ let setUpPlayerScene = () => {
         
         for (let [c, pidx] of game.options) {
             let cardDiv = document.createElement("div");
-            let cardLabel = document.createElement("h4");
+            let cardLabel = document.createElement("h5");
             cardLabel.innerHTML = c;
             cardDiv.className = "card";
             cardDiv.onclick = () => {
@@ -158,7 +158,7 @@ let setUpPlayerScene = () => {
     let player = players[choosing];
     for (let c of player.cards) {
         let cardDiv = document.createElement("div");
-        let cardLabel = document.createElement("h4");
+        let cardLabel = document.createElement("h5");
         cardLabel.innerHTML = c;
         cardDiv.className = "card";
         cardDiv.onclick = () => {

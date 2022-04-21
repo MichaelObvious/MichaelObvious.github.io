@@ -116,8 +116,6 @@ input {
 }
 
 .card-container {
-	padding-left: 10vw;
-	padding-right: 10vw;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -145,8 +143,9 @@ input {
 	padding: 10px 10px;
 	color: #111111;
 	width: 85%;
-
+	
 	border-radius: 15px;
+	padding: 10px;
 	outline-style:none;
 	border:none;
 	cursor:pointer;
