@@ -56,7 +56,7 @@ let shuffleDeck = (deck) => {
     let topCount = 0;
 
     while (topCount < 3) {
-        let newPos = rndInt(0, deck.length - 1);
+        let newPos = rndInt(2, deck.length - 1);
         let card = deck.shift();
         if (originalCard == card) {
             topCount += 1;
