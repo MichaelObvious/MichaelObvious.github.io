@@ -1,0 +1,55 @@
+<!doctype HTML>
+<html>
+	<head>
+		<title>Carte contro l'Umanità</title>
+		<meta name="description" content="Cards Against Humanity. Digital. In Italian">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="../style.css">
+		<script src="../toolbox.js" type="text/javascript"></script>
+		<script src="data.js" type="text/javascript"></script>
+		<script src="index.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<h1>Carte contro l'Umanità</h1>
+		<div id="playersnames">
+			<div style="display: table; margin-left: 20px; margin-right: 20px;">
+				<div style="display: table-row;" id="names">
+
+				</div>
+			</div>
+		</div>
+		
+		<form id="partecipanti"  autocomplete="off" class="inputprompt">
+			<p id="playersinputlabel">Inserisci almeno 3 partecipanti...</p>
+			<input type="text" placeholder="..." id="giocatore1"><br>
+            <input type="text" placeholder="..." id="giocatore2"><br>
+            <input type="text" placeholder="..." id="giocatore3"><br>
+            <input type="text" placeholder="..." id="giocatore4"><br>
+            <input type="text" placeholder="..." id="giocatore5"><br>
+            <input type="text" placeholder="..." id="giocatore6"><br>
+            <input type="text" placeholder="..." id="giocatore7"><br>
+            <input type="text" placeholder="..." id="giocatore8"><br>
+            <input type="text" placeholder="..." id="giocatore9"><br>
+            <input type="text" placeholder="..." id="giocatore10"><br>
+			<button class="button" type="button" id="inseritogiocatori">Ecco</button>
+		</form>
+
+		<br/>
+		<br/>
+
+		<div id="prompt" style="display: none;" class="prompt">
+		</div>
+		<div style="width: 33vw; margin: auto; margin-top: 50px;" class="inputprompt">
+			<button class="button" type="button" id="prossimo-giocatore" style="display: none;">Prossimo giocatore</button>
+		</div>
+		<div class="inputprompt" style="display: none;" id="prossima-mano-div">
+			<div id="punti-a" style="display: none;" class="inputprompt"></div>
+			<div style="width: 33vw; margin: auto;" class="inputprompt">
+				<button class="button" type="button" id="prossima-mano">Prossima mano</button>
+			</div>
+		</div>
+		<div id="scelta" style="display: none;" class="card-container">
+		</div>
+	</body>
+</html>

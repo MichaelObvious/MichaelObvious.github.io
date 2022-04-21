@@ -27,3 +27,9 @@ let hide = (element) => {
 let show = (element) => {
 	element.style = "";
 }
+
+let removeChildren = (parent) => {
+    while (parent.lastChild) {
+        parent.removeChild(parent.lastChild);
+    }
+};

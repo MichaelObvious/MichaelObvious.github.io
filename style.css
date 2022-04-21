@@ -57,6 +57,72 @@ input {
 	/*outline: 2px solid #555555;*/
 }
 
+.prompt {
+	font-family: Roboto;
+	color: white;
+	text-align: center;
+	font-size:24px;
+	
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 20px;
+	padding: 50px;
+	width: 50vw;
+	background-color: black;
+
+	/*outline: 2px solid #555555;*/
+}
+
+.card {
+	font-family: Roboto;
+	color: black;
+	text-align: center;
+	font-size: 24px;
+	border-radius: 20px;
+	padding: 20px;
+	width: 25vw;
+	max-width: 200px;
+	height: 40vw;
+	max-height: 320px;
+	background-color: white;
+	margin: 7.5px;
+
+	outline-style:none;
+	border:none;
+	cursor:pointer;
+
+	/* Disable text selection: https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting */
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-moz-user-select: none; /* Old versions of Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Chrome, Opera and Firefox */
+
+	/* 
+	Prevent double-tapping on button from zooming page on mobile
+	https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action
+	*/
+	touch-action: manipulation; 
+}
+
+.card:hover {
+  transition: transform 0.3s ease;
+  transform: translateY(-0.25em);
+}
+.card:active {
+	background-color: #e2e2e2;
+	transition: transform 0.3s ease;
+	transform: translateY(-0.25em);
+}
+
+.card-container {
+	padding-left: 10vw;
+	padding-right: 10vw;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+  }
+
 .paragraph {
 	font-family: Roboto;
 	color: #e5e4f0;
