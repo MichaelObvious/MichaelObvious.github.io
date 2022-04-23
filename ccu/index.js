@@ -83,7 +83,7 @@ let updatePlayerLabels = () => {
         playerNameLabel.style = `text-align: center; margin: 0 1em 0 1em; max-width: ${Math.floor(100/players.length)}vw;${index === czar ? "color: #fce200;" : ""}`
 
         if (index === choosing) {
-            playerNameLabel.innerHTML = `<b>${p.name}</b><br/>${p.points}`;
+            playerNameLabel.innerHTML = `<em><b>${p.name}</b><br/>${p.points}</em>`;
         } else {
             playerNameLabel.innerHTML = `${p.name}<br/>${p.points}`;
         }
